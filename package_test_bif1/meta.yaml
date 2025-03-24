@@ -1,0 +1,45 @@
+{% set name = "package_test_bif1" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/package_test_bif1-{{ version }}.tar.gz
+  sha256: 0a359f2a018f900f6f7ff9da335f48a9c749b48166a6e58f0e35e6e42c3f458f
+
+build:
+  entry_points:
+    - my-package-test = my_package_test:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.12
+    - hatchling
+    - pip
+  run:
+    - python >=3.12
+    - pytest >=8.3.5
+    - ruff >=0.11.2
+
+test:
+  imports:
+    - package_test_bif1
+  commands:
+    - pip check
+    - my-package-test --help
+  requires:
+    - pip
+
+about:
+  summary: Add your description here
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - AddYourGitHubIdHere
