@@ -1,5 +1,5 @@
 [project]
-name = "package-test-BIF1"
+name = "package_test_BIF1"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -10,10 +10,11 @@ requires-python = ">=3.12"
 dependencies = [
     "pytest>=8.3.5",
     "ruff>=0.11.2",
+    "typer>=0.15.2",
 ]
 
 [project.scripts]
-my-package-test = "my_package_test:main"
+cli = "package_test_BIF1.cli:cli"
 
 [build-system]
 requires = ["hatchling"]
@@ -21,3 +22,6 @@ build-backend = "hatchling.build"
 
 [pytest]
 addopts = "--doctest-modules"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/package_test_BIF1"]
